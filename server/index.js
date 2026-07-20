@@ -147,11 +147,15 @@ app.post('/api/contact', function(req, res) {
 
 app.use(express.static(path.join(__dirname, '..')));
 
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, '..', 'index.html'));
+});
+
 var dbReady = initDatabase();
-app.listen(PORT, function() {
+app.listen(PORT, '0.0.0.0', function() {
   console.log('');
-  console.log('Servidor: http://localhost:' + PORT);
-  console.log('Admin:    http://localhost:' + PORT + '/admin/');
+  console.log('Servidor: http://0.0.0.0:' + PORT);
+  console.log('Admin:    http://0.0.0.0:' + PORT + '/admin/');
   console.log(dbReady ? 'DB: OK (SQLite)' : 'DB: ERROR');
   console.log('');
 });

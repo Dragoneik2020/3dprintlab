@@ -2,6 +2,9 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const Database = require('better-sqlite3');
+const nodemailer = require('nodemailer');
+
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -76,6 +79,69 @@ app.post('/api/reset', function(req, res) {
     res.json({ success: true });
   } catch (err) {
     res.status(503).json({ error: err.message });
+  }
+});
+
+var transporter = null;
+if (process.env.SMTP_USER && process.env.SMTP_USER !== 'tu_email@gmail.com') {
+  transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: parseInt(process.env.SMTP_PORT || '587'),
+    secure: false,
+    auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
+  });
+  console.log('SMTP configurado: ' + process.env.SMTP_USER);
+} else {
+  console.log('SMTP no configurado. Edita server/.env');
+}
+
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+app.post('/api/contact', function(req, res) {
+  try {
+    var name = (req.body.name || '').trim();
+    var email = (req.body.email || '').trim();
+    var service = (req.body.service || '').trim();
+    var size = (req.body.size || '').trim();
+    var message = (req.body.message || '').trim();
+
+    if (!name || !email) {
+      return res.status(400).json({ error: 'Nombre y email son obligatorios' });
+    }
+
+    var html = '<h2>Nueva solicitud de cotizacion - 3DPrintLab</h2>' +
+      '<p><strong>Nombre:</strong> ' + name + '</p>' +
+      '<p><strong>Email:</strong> ' + email + '</p>' +
+      '<p><strong>Servicio:</strong> ' + (service || 'No especificado') + '</p>' +
+      '<p><strong>Tamano:</strong> ' + (size || 'No especificado') + '</p>' +
+      '<p><strong>Mensaje:</strong></p><p>' + (message || '(sin mensaje)') + '</p>';
+
+    if (transporter) {
+      transporter.sendMail({
+        from: '"3DPrintLab Web" <' + process.env.SMTP_USER + '>',
+        to: process.env.CONTACT_TO || process.env.SMTP_USER,
+        replyTo: email,
+        subject: 'Cotizacion: ' + name + ' - ' + (service || 'General'),
+        html: html
+      }).then(function() {
+        console.log('Email enviado: ' + name + ' <' + email + '>');
+        res.json({ success: true });
+      }).catch(function(err) {
+        console.error('Error email:', err.message);
+        res.status(500).json({ error: 'Error al enviar email' });
+      });
+    } else {
+      console.log('--- Solicitud de contacto (SMTP no configurado) ---');
+      console.log('Nombre:', name);
+      console.log('Email:', email);
+      console.log('Servicio:', service);
+      console.log('Tamano:', size);
+      console.log('Mensaje:', message);
+      console.log('-----------------------------------------------');
+      res.json({ success: true, note: 'Guardado en consola (configura SMTP en server/.env para enviar emails)' });
+    }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 

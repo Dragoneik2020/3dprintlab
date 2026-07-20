@@ -55,18 +55,15 @@
     var fbot = $('.footer-bot p');
     if (fbot) fbot.textContent = data.footer.copyright;
 
-    var fmail = $('.footer-col:last-child a:first-child');
+    var fmail = $('.footer-col:last-child a:nth-of-type(1)');
     if (fmail) { fmail.textContent = data.site.email; fmail.href = 'mailto:' + data.site.email; }
 
-    var fphone = $('.footer-col:last-child a:nth-child(2)');
-    if (fphone) fphone.textContent = data.site.phone;
-
-    var fwsp = $('.footer-col:last-child a:nth-child(3)');
-    if (fwsp) fwsp.href = data.contact.whatsapp || '#';
+    var fwsp = $('.footer-col:last-child a:nth-of-type(2)');
+    if (fwsp && data.contact.whatsapp && data.contact.whatsapp !== '#') fwsp.href = data.contact.whatsapp;
 
     // Contact
     var cwsp = $('.cont-ch.ch-wsp');
-    if (cwsp) cwsp.href = data.contact.whatsapp || '#';
+    if (cwsp && data.contact.whatsapp && data.contact.whatsapp !== '#') cwsp.href = data.contact.whatsapp;
 
     var cmail = $('.cont-ch.ch-mail');
     if (cmail) {
@@ -301,16 +298,14 @@ function applyData() {
   if (fbot) fbot.textContent = d.footer.copyright;
 
   // Footer contact links
-  var fmail = _$('.footer-col:last-child a:first-child');
+  var fmail = _$('.footer-col:last-child a:nth-of-type(1)');
   if (fmail) { fmail.textContent = d.site.email; fmail.href = 'mailto:' + d.site.email; }
-  var fphone = _$('.footer-col:last-child a:nth-child(2)');
-  if (fphone) fphone.textContent = d.site.phone;
-  var fwsp = _$('.footer-col:last-child a:nth-child(3)');
-  if (fwsp) fwsp.href = d.contact.whatsapp || '#';
+  var fwsp = _$('.footer-col:last-child a:nth-of-type(2)');
+  if (fwsp && d.contact.whatsapp && d.contact.whatsapp !== '#') fwsp.href = d.contact.whatsapp;
 
   // Contact section
   var cwsp = _$('.cont-ch.ch-wsp');
-  if (cwsp) cwsp.href = d.contact.whatsapp || '#';
+  if (cwsp && d.contact.whatsapp && d.contact.whatsapp !== '#') cwsp.href = d.contact.whatsapp;
   var cmail = _$('.cont-ch.ch-mail');
   if (cmail) {
     var ct = Array.from(cmail.childNodes).find(function(n){return n.nodeType===3;});

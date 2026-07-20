@@ -9,7 +9,7 @@ const defaultData = {
     logoAccent: 'Lab',
     email: 'hola@3dprintlab.cl',
     phone: '+56 9 XXXX XXXX',
-    whatsapp: '#',
+    whatsapp: 'https://wa.me/56972969660',
     country: 'Chile',
     year: '2024'
   },
@@ -69,7 +69,7 @@ const defaultData = {
     contact: { tag: 'Contacto', title: '¿Tienes una idea?', description: 'Cuéntanos qué te gustaría crear y te cotizamos sin compromiso. Respondemos en menos de 1 hora.' }
   },
   contact: {
-    whatsapp: '#',
+    whatsapp: 'https://wa.me/56972969660',
     email: 'hola@3dprintlab.cl',
     responseTime: 'menos de 1 hora',
     formPlaceholder: 'Cuéntanos tu idea: qué es, para quién, colores, estilo, fecha límite...'

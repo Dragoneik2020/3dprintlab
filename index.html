@@ -348,7 +348,7 @@
                     <h2>¿Tienes una idea?</h2>
                     <p>Cuéntanos qué te gustaría crear y te cotizamos sin compromiso. Respondemos en menos de 1 hora.</p>
                     <div class="cont-chs">
-                        <a href="#" class="cont-ch ch-wsp">
+                        <a href="https://wa.me/56900000000" target="_blank" rel="noopener" class="cont-ch ch-wsp">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                             WhatsApp
                         </a>
@@ -364,11 +364,11 @@
                 </div>
                 <form class="cont-form" id="contactForm">
                     <div class="cf-row">
-                        <input type="text" placeholder="Nombre" required>
-                        <input type="email" placeholder="Email o teléfono" required>
+                        <input type="text" name="name" placeholder="Nombre" required>
+                        <input type="email" name="email" placeholder="Email o teléfono" required>
                     </div>
                     <div class="cf-row">
-                        <select required>
+                        <select name="service" required>
                             <option value="">¿Qué te gustaría?</option>
                             <option>Figura personalizada</option>
                             <option>Réplica de mascota</option>
@@ -378,7 +378,7 @@
                             <option>Regalo especial</option>
                             <option>Otro</option>
                         </select>
-                        <select required>
+                        <select name="size" required>
                             <option value="">Tamaño aproximado</option>
                             <option>Pequeño (< 10 cm)</option>
                             <option>Mediano (10-20 cm)</option>
@@ -387,7 +387,7 @@
                             <option>No sé aún</option>
                         </select>
                     </div>
-                    <textarea placeholder="Cuéntanos tu idea: qué es, para quién, colores, estilo, fecha límite..." rows="4"></textarea>
+                    <textarea name="message" placeholder="Cuéntanos tu idea: qué es, para quién, colores, estilo, fecha límite..." rows="4"></textarea>
                     <div class="cf-file" id="fileDrop">
                         <input type="file" accept=".stl,.obj,.3mf,.stp,.png,.jpg,.jpeg" multiple hidden>
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
@@ -414,7 +414,7 @@
                         <defs><linearGradient id="lf" x1="4" y1="4" x2="28" y2="28"><stop stop-color="#f97316"/><stop offset="1" stop-color="#ec4899"/></linearGradient></defs>
                     </svg>
                 </span>
-                <strong>3DPrintLab</strong>
+                <strong>Rincon-Z.com</strong>
                 <p>Figuras, réplicas y regalos personalizados.<br>Chile · Calidad y detalle garantizados.</p>
             </div>
             <div class="footer-col">
@@ -432,9 +432,7 @@
             <div class="footer-col">
                 <h6>Contacto</h6>
                 <a href="mailto:hola@3dprintlab.cl">hola@3dprintlab.cl</a>
-                <a href="#">+56 9 XXXX XXXX</a>
-                <a href="#">WhatsApp</a>
-                <a href="admin/" style="font-size:0.75rem;opacity:0.4;margin-top:8px">⚙️ Admin</a>
+                <a href="https://wa.me/56972969660" target="_blank" rel="noopener">WhatsApp</a>
             </div>
         </div>
         <div class="container footer-bot">
@@ -442,6 +440,8 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="emailjs-config.js"></script>
     <script src="script.js"></script>
     <script src="apply.js"></script>
     <a href="admin/" class="admin-badge" title="Panel de administración">⚙️</a>

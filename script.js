@@ -32,7 +32,7 @@ if (dropZone) {
     }
 }
 
-// Form submit
+// Form submit (EmailJS + backend fallback)
 const form = document.getElementById('contactForm');
 if (form) {
     form.addEventListener('submit', async e => {
@@ -41,10 +41,43 @@ if (form) {
         const orig = btn.innerHTML;
         btn.innerHTML = 'Enviando...';
         btn.disabled = true;
-        await new Promise(r => setTimeout(r, 1400));
-        btn.innerHTML = 'Solicitud enviada ✓';
-        btn.style.background = '#22c55e';
-        btn.style.borderColor = '#22c55e';
+
+        var emailjsReady = typeof emailjs !== 'undefined' &&
+            typeof EMAILJS_CONFIG !== 'undefined' &&
+            EMAILJS_CONFIG.publicKey !== 'TU_PUBLIC_KEY';
+
+        try {
+            if (emailjsReady) {
+                var fd = new FormData(form);
+                var params = {
+                    from_name: fd.get('name'),
+                    from_email: fd.get('email'),
+                    service: fd.get('service'),
+                    size: fd.get('size'),
+                    message: fd.get('message')
+                };
+                await emailjs.send(EMAILJS_CONFIG.serviceID, EMAILJS_CONFIG.templateID, params);
+                btn.innerHTML = 'Solicitud enviada ✓';
+                btn.style.background = '#22c55e';
+                btn.style.borderColor = '#22c55e';
+            } else {
+                var fd2 = new FormData(form);
+                var res = await fetch('/api/contact', { method: 'POST', body: fd2 });
+                var data = await res.json();
+                if (data.success) {
+                    btn.innerHTML = 'Solicitud enviada ✓';
+                    btn.style.background = '#22c55e';
+                    btn.style.borderColor = '#22c55e';
+                } else {
+                    throw new Error(data.error || 'Error');
+                }
+            }
+        } catch (err) {
+            btn.innerHTML = 'Error al enviar';
+            btn.style.background = '#ef4444';
+            btn.style.borderColor = '#ef4444';
+        }
+
         setTimeout(() => {
             btn.innerHTML = orig;
             btn.style.background = '';

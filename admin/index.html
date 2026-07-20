@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin — 3DPrintLab CMS</title>
+    <link rel="stylesheet" href="admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app"></div>
+
+    <template id="login-template">
+        <div class="login-wrap">
+            <div class="login-box">
+                <div class="login-logo">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <rect x="2" y="2" width="28" height="28" rx="8" stroke="url(#lg)" stroke-width="2.5"/>
+                        <path d="M10 22V17L16 9L22 17V22" stroke="url(#lg)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M16 9V24" stroke="url(#lg)" stroke-width="2.5"/>
+                        <defs><linearGradient id="lg" x1="4" y1="4" x2="28" y2="28"><stop stop-color="#f97316"/><stop offset="1" stop-color="#ec4899"/></linearGradient></defs>
+                    </svg>
+                    <span>3DPrintLab CMS</span>
+                </div>
+                <p class="login-desc">Panel de administración</p>
+                <form id="loginForm">
+                    <input type="password" placeholder="Contraseña" required autofocus>
+                    <button type="submit" class="btn btn-primary btn-full">Ingresar</button>
+                </form>
+                <p class="login-hint">Contraseña por defecto: <code>admin123</code></p>
+            </div>
+        </div>
+    </template>
+
+    <template id="dashboard-template">
+        <aside class="sidebar">
+            <div class="sidebar-head">
+                <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+                    <rect x="2" y="2" width="28" height="28" rx="8" stroke="url(#lg)" stroke-width="2.5"/>
+                    <path d="M10 22V17L16 9L22 17V22" stroke="url(#lg)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16 9V24" stroke="url(#lg)" stroke-width="2.5"/>
+                    <defs><linearGradient id="lg" x1="4" y1="4" x2="28" y2="28"><stop stop-color="#f97316"/><stop offset="1" stop-color="#ec4899"/></linearGradient></defs>
+                </svg>
+                <span>3DPrintLab</span>
+            </div>
+            <nav class="sidebar-nav" id="sidebarNav">
+                <a href="#general" class="active" data-section="general">📋 General</a>
+                <a href="#hero" data-section="hero">🎯 Hero</a>
+                <a href="#showcase" data-section="showcase">📦 Showcase</a>
+                <a href="#services" data-section="services">🛠️ Servicios</a>
+                <a href="#gallery" data-section="gallery">🖼️ Galería</a>
+                <a href="#process" data-section="process">⚙️ Proceso</a>
+                <a href="#testimonials" data-section="testimonials">💬 Testimonios</a>
+                <a href="#sections" data-section="sections">📑 Secciones</a>
+                <a href="#contact" data-section="contact">📞 Contacto</a>
+                <a href="#footer" data-section="footer">📄 Footer</a>
+                <a href="#debug" data-section="debug" style="border-top:1px solid var(--line);margin-top:8px;padding-top:12px">🔍 Debug</a>
+            </nav>
+            <div class="sidebar-foot">
+                <a href=".." class="btn btn-outline btn-sm" target="_blank">👁️ Ver tienda</a>
+                <button class="btn btn-sm btn-logout" id="logoutBtn">🚪 Salir</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h1 id="sectionTitle">General</h1>
+                <div class="header-actions">
+                    <span class="save-status" id="saveStatus"></span>
+                    <button class="btn btn-outline btn-sm" id="exportBtn">📤 Exportar</button>
+                    <button class="btn btn-outline btn-sm" id="importBtn">📥 Importar</button>
+                    <button class="btn btn-primary btn-sm" id="saveAllBtn">💾 Guardar todo</button>
+                </div>
+            </header>
+            <div class="section-content" id="sectionContent"></div>
+        </main>
+
+        <input type="file" id="importFileInput" accept=".json" hidden>
+    </template>
+
+    <script src="../data.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

@@ -1,4 +1,8 @@
 node_modules/
-server/node_modules/
-*.db
+dist/
 .env
+uploads/
+output/
+*.stl
+.DS_Store
+*.log

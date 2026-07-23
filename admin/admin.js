@@ -85,7 +85,7 @@ function saveAll() {
   } catch (e) { /* ignore */ }
 
   // Save to API
-  const url = (window.location.port === '3001' ? '' : 'http://localhost:3001') + '/api/data';
+  const url = '/api/data';
   fetch(url, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },

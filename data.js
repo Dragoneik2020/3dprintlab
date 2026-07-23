@@ -1,6 +1,6 @@
 const STORAGE_KEY = '3dprintlab_data';
 const PENDING_KEY = '3dprintlab_pending';
-const API_BASE = window.location.port === '3001' ? '' : 'http://localhost:3001';
+const API_BASE = '';
 
 const defaultData = {
   site: {
